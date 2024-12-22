@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Spinner, Flex } from "@radix-ui/themes";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
