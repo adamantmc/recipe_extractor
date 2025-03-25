@@ -1,0 +1,9 @@
+{
+    "prompts": [
+        {
+            "name": "Default",
+            "prompt": "You are a helpful assistant that extracts recipe information from text. Please analyze the following text and extract the recipe details in a structured format."
+        }
+    ],
+    "currentPrompt": "Default"
+}
