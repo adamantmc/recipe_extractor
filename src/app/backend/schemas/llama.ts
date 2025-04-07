@@ -1,4 +1,4 @@
-{
+export const LLAMA_SCHEMA = {
     "type": "object",
     "properties": {
         "title": {

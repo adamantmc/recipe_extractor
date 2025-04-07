@@ -1,4 +1,4 @@
-{
+export const GEMINI_SCHEMA = {
     "type": "object",
     "properties": {
         "title": {

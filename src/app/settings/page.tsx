@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select"
 import { useState, useEffect } from "react";
 import { listPrompts, getCurrentPrompt, setCurrentPrompt as setCurrentPromptBackend, addPrompt, Prompt } from "../backend/prompts";
-import { setExtractorModel, loadSchemas } from "../backend/recipe_extractor";
+import { setExtractorModel } from "../backend/recipe_extractor";
 
 function PromptSettings() {
     const [prompts, setPrompts] = useState<Prompt[]>([]);
@@ -63,7 +63,6 @@ function PromptSettings() {
         try {
             setSelectedModel(model);
             await setExtractorModel(model);
-            await loadSchemas();
         } catch (error) {
             console.error('Error selecting model:', error);
             setSelectedModel('llama'); // Revert on error
