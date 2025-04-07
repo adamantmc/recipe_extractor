@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select"
 import { useState, useEffect } from "react";
 import { listPrompts, getCurrentPrompt, setCurrentPrompt as setCurrentPromptBackend, addPrompt, Prompt } from "../backend/prompts";
+import { setExtractorModel, loadSchemas } from "../backend/recipe_extractor";
 
 function PromptSettings() {
     const [prompts, setPrompts] = useState<Prompt[]>([]);
@@ -21,6 +22,7 @@ function PromptSettings() {
     const [newPromptName, setNewPromptName] = useState("");
     const [newPromptText, setNewPromptText] = useState("");
     const [selectedPromptName, setSelectedPromptName] = useState<string>("");
+    const [selectedModel, setSelectedModel] = useState<'llama' | 'gemini'>('llama');
 
     useEffect(() => {
         loadPrompts();
@@ -59,6 +61,17 @@ function PromptSettings() {
         }
     };
 
+    const handleModelSelect = async (model: 'llama' | 'gemini') => {
+        try {
+            setSelectedModel(model);
+            await setExtractorModel(model);
+            await loadSchemas();
+        } catch (error) {
+            console.error('Error selecting model:', error);
+            setSelectedModel('llama'); // Revert on error
+        }
+    };
+
     const handleAddPrompt = async () => {
         if (newPromptName && newPromptText) {
             try {
@@ -76,6 +89,27 @@ function PromptSettings() {
 
     return (
         <div className="space-y-4">
+            <div className="space-y-2">
+                <h3 className="text-lg font-semibold">Select Model</h3>
+                <Select
+                    value={selectedModel}
+                    onValueChange={(value: 'llama' | 'gemini') => {
+                        void handleModelSelect(value);
+                    }}
+                >
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select a model" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel>Models</SelectLabel>
+                            <SelectItem value="llama">Olamma (Local)</SelectItem>
+                            <SelectItem value="gemini">Gemini Pro</SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
+
             <div className="space-y-2">
                 <h3 className="text-lg font-semibold">Select Prompt</h3>
                 <Select

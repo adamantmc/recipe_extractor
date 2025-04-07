@@ -16,7 +16,7 @@ class PromptHandler {
     constructor() {
         this.prompts = [];
         this.currentPrompt = "Default";
-        this.promptsPath = path.join(process.cwd(), "src/static/prompts.json");
+        this.promptsPath = path.join(process.cwd(), 'src/static/prompts.json');
     }
 
     private async loadPrompts() {
@@ -88,6 +88,7 @@ class PromptHandler {
 
 const promptHandler = new PromptHandler();
 
+// Set initial prompt
 setExtractorPrompt((await promptHandler.getCurrentPrompt()).prompt);
 
 export async function listPrompts() {

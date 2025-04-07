@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getCurrentPrompt } from './backend/prompts';
 import { RecipeViewer } from './components/RecipeViewer';
 import { parseRecipeFromWebpage } from './backend/html_parser';
-import { extractRecipe } from './backend/recipe_extractor';
+import { extractRecipe, loadSchemas } from './backend/recipe_extractor';
 
 export default function Home() {
   const [url, setUrl] = useState('');
@@ -12,13 +12,24 @@ export default function Home() {
   const [recipe, setRecipe] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    // Load schemas when the app starts
+    const loadSchemasAsync = async () => {
+      try {
+        await loadSchemas();
+      } catch (err) {
+        console.error('Error loading schemas:', err);
+      }
+    };
+    void loadSchemasAsync();
+  }, []);
+
   const onExtractButtonClick = async () => {
     setIsLoading(true);
     setError(null);
     setRecipe(null);
 
     try {
-
       const recipeText = await parseRecipeFromWebpage(url);
       const recipeData = await extractRecipe(recipeText);
       console.log('Extracted recipe data:', recipeData);
