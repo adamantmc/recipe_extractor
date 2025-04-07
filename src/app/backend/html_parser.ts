@@ -3,7 +3,7 @@ import { parse } from 'node-html-parser';
 
 
 async function fetchWebpage(url: string) {
-  let response = await fetch(url);
+  const response = await fetch(url);
 
   if (!response.ok) {
     return null;
@@ -14,9 +14,9 @@ async function fetchWebpage(url: string) {
 
 
 export async function parseRecipeFromWebpage(url: string) {
-  let webpageText: string | null = await fetchWebpage(url);
+  const webpageText: string | null = await fetchWebpage(url);
 
-  let conf = {
+  const conf = {
     lowerCaseTagName: false,		// convert tag name to lower case (hurts performance heavily)
     comment: false,           		// retrieve comments (hurts performance slightly)
     fixNestedATags: false,    		// fix invalid nested <a> HTML tags 
@@ -36,7 +36,7 @@ export async function parseRecipeFromWebpage(url: string) {
   const promise: Promise<string> = new Promise(function (resolve, reject) {
     if (webpageText === null) reject();
     else {
-      let parsed = parse(webpageText, conf);
+      const parsed = parse(webpageText, conf);
 
       const body = parsed.querySelector("body");
 

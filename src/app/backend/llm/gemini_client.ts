@@ -1,6 +1,6 @@
 'use server'
 
-import { GoogleGenerativeAI, GenerateContentRequest, GenerationConfig } from '@google/generative-ai';
+import { GoogleGenerativeAI, GenerateContentRequest, Schema } from '@google/generative-ai';
 import { AbstractLLMClient, LLMResponse } from './abstract_llm_client';
 
 class GeminiClient extends AbstractLLMClient {
@@ -12,13 +12,13 @@ class GeminiClient extends AbstractLLMClient {
         this.model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     }
 
-    async generateContent(text: string, schema?: object): Promise<LLMResponse> {
+    async generateContent(text: string, schema?: Schema): Promise<LLMResponse> {
         try {
             const request: GenerateContentRequest = {
                 contents: [{ role: "user", parts: [{ text: this.prompt + "\n" + text }] }],
                 generationConfig: schema ? {
                     responseMimeType: 'application/json',
-                    responseSchema: schema as any // Type assertion needed as the schema type is not properly exposed
+                    responseSchema: schema
                 } : undefined
             };
             const result = await this.model.generateContent(request);

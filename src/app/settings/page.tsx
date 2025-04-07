@@ -1,8 +1,6 @@
 'use client'
 
-import { Textarea } from "@/app/components/textarea";
 import { Button } from "@/components/ui/button";
-import { TokensIcon, FileTextIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import {
     Select,
     SelectContent,

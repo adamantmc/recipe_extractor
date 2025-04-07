@@ -1,11 +1,7 @@
 "use client"
 
-import { useState } from "react";
-import { GearIcon, GitHubLogoIcon, SunIcon, MoonIcon } from "@radix-ui/react-icons"
-import * as Separator from "@radix-ui/react-separator";
-import * as Dialog from '@radix-ui/react-dialog';
+import { GearIcon, SunIcon, MoonIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils"
 
 const TopBar = ({ onSettingsClick, onThemeClick }: { onSettingsClick: () => void, onThemeClick: () => void }) => {
     return (

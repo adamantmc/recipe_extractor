@@ -6,8 +6,6 @@ import LlamaClient from './llm/llama_client';
 import GeminiClient from './llm/gemini_client';
 import { AbstractLLMClient } from './llm/abstract_llm_client';
 
-const SECTIONS = ["Title", "Duration", "Ingredients", "Steps", "Notes"]
-
 type ModelType = 'llama' | 'gemini';
 
 class RecipeExtractor {
