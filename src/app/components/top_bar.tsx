@@ -36,14 +36,16 @@ const TopBar = ({ onSettingsClick, onThemeClick }: { onSettingsClick: () => void
                 transition={{ duration: 0.5 }}
                 className="flex flex-row gap-2"
             >
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={onSettingsClick}
-                    className="w-10 h-10 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
-                >
-                    <GearIcon style={{ width: "1.5em", height: "1.5em" }} />
-                </Button>
+                {process.env.NODE_ENV === 'development' && (
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={onSettingsClick}
+                        className="w-10 h-10 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+                    >
+                        <GearIcon style={{ width: "1.5em", height: "1.5em" }} />
+                    </Button>
+                )}
 
                 <Button
                     variant="ghost"
