@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={isDarkTheme ? 'dark' : ''}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-zinc-950 text-gray-900 dark:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-white to-gray-50 dark:from-zinc-900 dark:to-zinc-950 text-gray-900 dark:text-white`}
       >
         <TopBar onSettingsClick={() => setIsSettingsOpen(true)} onThemeClick={toggleTheme} />
         <div className="pt-16">
