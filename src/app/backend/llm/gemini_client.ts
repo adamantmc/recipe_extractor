@@ -21,8 +21,9 @@ class GeminiClient extends AbstractLLMClient {
                     responseSchema: schema
                 } : undefined
             };
+            console.log("Calling Gemini")
             const result = await this.model.generateContent(request);
-            const response = await result.response;
+            const response = result.response;
             const responseText = response.text();
 
             return { response: responseText };

@@ -13,20 +13,25 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const onExtractButtonClick = async () => {
+    console.log("Extracting recipe from ", url);
+
     setIsLoading(true);
     setError(null);
     setRecipe(null);
 
     try {
       const recipeText = await parseRecipeFromWebpage(url);
+      console.log("Retrieved text from", url, "- extracting recipe");
       const recipeData = await extractRecipe(recipeText);
       console.log('Extracted recipe data:', recipeData);
       const recipe = JSON.parse(recipeData.response);
 
       setRecipe(recipe);
     } catch (err) {
-      console.error('Extraction error:', err);
-      setError('Failed to extract recipe. Please try again.');
+      let err_message = "Unexpected error";
+      if(err instanceof Error) err_message = err.message;
+      console.log('Extraction error:', err_message);
+      setError(err_message);
     } finally {
       setIsLoading(false);
     }
